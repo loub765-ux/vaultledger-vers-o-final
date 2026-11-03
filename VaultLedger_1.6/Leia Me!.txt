@@ -1,0 +1,17 @@
+Encerrar o servidor
+No terminal onde o servidor está rodando:
+
+Clique nesse terminal (para ele ficar ativo)
+Pressione Ctrl + C
+
+Ele deve parar e voltar o prompt do PowerShell, por exemplo:
+textPS C:\Users\mater\OneDrive\Desktop\vaultledger beta\pages>
+
+Se não parar com Ctrl+C
+Feche a janela do terminal ou rode:
+PowerShellGet-Process python* | Stop-Process
+(isso encerra processos Python abertos)
+
+Para ligar de novo depois
+PowerShellcd "C:\Users\mater\OneDrive\Desktop\vaultledger beta\pages"
+py app.py

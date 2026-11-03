@@ -1,0 +1,137 @@
+/* VaultLedger — calculadora 50/30/20. Estilos limitados à página. */
+body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f6f6f4; }
+
+.vl-calculator {
+  --vl-yellow: #f4c400;
+  --vl-ink: #171717;
+  width: min(1100px, 100%);
+  box-sizing: border-box;
+  padding: clamp(22px, 3vw, 42px);
+  background: #fff;
+  border: 1px solid #ecece8;
+  border-radius: 28px;
+  box-shadow: 0 16px 50px rgba(24, 24, 24, .035);
+  color: var(--vl-ink);
+}
+.vl-calculator * { box-sizing: border-box; }
+.vl-calculator-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 35px; }
+.vl-calculator-heading { max-width: 670px; }
+.vl-calculator-eyebrow, .vl-results-eyebrow {
+  display: flex; align-items: center; gap: 8px;
+  color: #927500; font-size: 11px; font-weight: 800;
+  letter-spacing: 1.15px;
+}
+.vl-calculator-eyebrow svg { width: 15px; height: 15px; }
+.vl-calculator-heading h1 { margin: 13px 0 10px; font-size: clamp(27px, 3vw, 36px); line-height: 1.18; font-weight: 800; letter-spacing: -1.2px; }
+.vl-calculator-heading h1 span { color: #d6a900; }
+.vl-calculator-heading p { color: #747980; font-size: 14px; line-height: 1.65; }
+.vl-calculator-form { margin-bottom: 8px; }
+.vl-income-label { display: block; font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+.vl-income-hint { color: #85888d; font-size: 12px; margin-bottom: 13px; }
+.vl-income-controls { display: flex; align-items: stretch; gap: 12px; }
+.vl-income-field {
+  height: 58px; display: flex; align-items: center;
+  flex: 1 1 auto; min-width: 0;
+  border: 1.5px solid #e5e6e7; border-radius: 16px;
+  background: #fafafa; transition: border-color .2s, box-shadow .2s;
+}
+.vl-income-field:focus-within { border-color: #edbd00; box-shadow: 0 0 0 4px rgba(244,196,0,.13); }
+.vl-income-prefix { flex: 0 0 auto; padding-left: 20px; padding-right: 13px; font-weight: 800; color: #717171; font-size: 16px; }
+.vl-income-field input {
+  width: 100%; min-width: 0; height: 100%; border: 0; outline: none;
+  background: transparent; font: inherit; font-size: 18px;
+  font-weight: 800; color: #1f2937; padding: 0 14px 0 0;
+}
+.vl-income-field input::placeholder { color: #b2b2b2; font-weight: 500; font-size: 14px; }
+.vl-income-field input[aria-invalid="true"] { color: #bd2b2b; }
+.vl-calc-button {
+  flex: 0 0 auto; width: 180px; display: inline-flex; align-items: center;
+  justify-content: center; gap: 13px; border: none; border-radius: 16px;
+  background: #f4c400; color: #171717; font-size: 15px; font-weight: 800;
+  cursor: pointer; box-shadow: 0 8px 17px rgba(244,196,0,.19);
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.vl-calc-button:hover { background: #e4b600; transform: translateY(-1px); box-shadow: 0 11px 20px rgba(244,196,0,.23); }
+.vl-calc-button:focus-visible { outline: 3px solid #9a8106; outline-offset: 3px; }
+.vl-calc-button svg { width: 19px; height: 19px; }
+.vl-calc-error { color: #ba3333; margin-top: 11px; font-size: 13px; font-weight: 600; }
+.vl-calc-error[hidden], .vl-results[hidden] { display: none !important; }
+.vl-results { margin-top: 35px; padding-top: 30px; border-top: 1px solid #eeeef0; animation: vl-enter .25s ease-out; }
+@keyframes vl-enter { from { opacity: .5; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.vl-results-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
+.vl-results-eyebrow { color: #858585; font-size: 10px; margin-bottom: 7px; }
+.vl-results-header h2 { font-size: clamp(20px, 2vw, 24px); font-weight: 800; letter-spacing: -.5px; text-align: left; margin: 0; }
+.vl-income-total { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 11px; color: #8a8a8a; }
+.vl-income-total strong { color: #282828; font-size: 17px; font-weight: 800; white-space: nowrap; }
+.vl-results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.vl-result-card {
+  min-width: 0; padding: 22px 20px 17px; border: 1px solid;
+  border-radius: 20px; transition: transform .2s, box-shadow .2s;
+}
+.vl-result-card:hover { transform: translateY(-3px); box-shadow: 0 14px 22px rgba(0,0,0,.04); }
+.vl-needs { background: #fff9e6; border-color: #faedbe; --vl-accent: #e5ad00; --vl-accent-bg: #ffe8a0; }
+.vl-wants { background: #eff6ff; border-color: #dce9ff; --vl-accent: #3b82f6; --vl-accent-bg: #d7e7ff; }
+.vl-future { background: #edfbf2; border-color: #d5f5df; --vl-accent: #18a653; --vl-accent-bg: #c9f3d7; }
+.vl-result-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 17px; gap: 12px; }
+.vl-result-icon { width: 46px; height: 46px; border-radius: 13px; background: var(--vl-accent-bg); color: var(--vl-accent); display: grid; place-items: center; }
+.vl-result-icon svg { width: 24px; height: 24px; stroke-width: 2.2; }
+.vl-result-percentage { font-size: 27px; font-weight: 850; color: var(--vl-accent); letter-spacing: -.8px; }
+.vl-result-card h3 { font-size: 15px; line-height: 1.35; font-weight: 800; margin: 0 0 6px; }
+.vl-result-amount { display: block; font-size: clamp(20px, 2.25vw, 27px); font-weight: 850; line-height: 1.3; letter-spacing: -.8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.vl-result-card p { min-height: 43px; margin: 9px 0 17px; font-size: 12px; line-height: 1.6; color: #747b81; }
+.vl-card-progress { height: 6px; border-radius: 20px; background: rgba(0,0,0,.07); overflow: hidden; }
+.vl-card-progress span { display: block; height: 100%; background: var(--vl-accent); border-radius: inherit; }
+.vl-breakdown-label { margin: 24px 0 9px; display: flex; justify-content: space-between; gap: 12px; color: #747980; font-size: 12px; font-weight: 700; }
+.vl-breakdown-bar { display: flex; height: 12px; border-radius: 20px; overflow: hidden; gap: 3px; }
+.vl-breakdown-bar .vl-breakdown-needs { width: 50%; background: #f0be1b; }
+.vl-breakdown-bar .vl-breakdown-wants { width: 30%; background: #4587ee; }
+.vl-breakdown-bar .vl-breakdown-future { width: 20%; background: #27b76a; }
+.vl-calculator-tip {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: #f6f9ff; border: 1px solid #e4edfd; border-radius: 16px;
+  padding: 17px 20px; margin-top: 29px;
+}
+.vl-tip-icon { color: #2e76db; background: #dcecff; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 10px; display: grid; place-items: center; }
+.vl-tip-icon svg { width: 19px; height: 19px; }
+.vl-calculator-tip strong { display: block; font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+.vl-calculator-tip p { font-size: 12px; line-height: 1.65; color: #626f7e; }
+
+/* Temas existentes do site */
+.dark .vl-calculator, .theme-blue .vl-calculator { background: #242424; border-color: #3a3a3a; color: #f5f5f5; }
+.theme-blue .vl-calculator { background: #092344; border-color: #1d4367; }
+.dark .vl-calculator-heading p, .theme-blue .vl-calculator-heading p,
+.dark .vl-income-hint, .theme-blue .vl-income-hint { color: #adb6c2; }
+.dark .vl-income-field, .theme-blue .vl-income-field { background: #1a1a1a; border-color: #454545; }
+.theme-blue .vl-income-field { background: #061a32; border-color: #285074; }
+.dark .vl-income-field input, .theme-blue .vl-income-field input,
+.dark .vl-income-total strong, .theme-blue .vl-income-total strong { color: #f4f4f4; }
+.dark .vl-results, .theme-blue .vl-results { border-top-color: #3a3a3a; }
+.dark .vl-result-card, .theme-blue .vl-result-card { background: #303030; border-color: #444; }
+.theme-blue .vl-result-card { background: #112c4a; border-color: #234463; }
+.dark .vl-result-card p, .theme-blue .vl-result-card p { color: #aeb8c3; }
+.dark .vl-calculator-tip, .theme-blue .vl-calculator-tip { background: #26334a; border-color: #354864; }
+.dark .vl-calculator-tip p, .theme-blue .vl-calculator-tip p { color: #c0cad9; }
+
+@media (max-width: 1100px) { .vl-results-grid { gap: 10px; } .vl-result-card { padding: 18px 15px; } .vl-result-amount { font-size: 21px; } }
+@media (max-width: 760px) {
+  .vl-results-grid { grid-template-columns: 1fr; }
+  .vl-results-header { align-items: flex-start; }
+  .vl-result-card { padding: 17px 19px; }
+  .vl-result-card-top { margin-bottom: 12px; }
+  .vl-result-card p { min-height: 0; }
+  .vl-result-amount { font-size: 25px; }
+}
+@media (max-width: 540px) {
+  .vl-calculator { padding: 23px 18px; border-radius: 21px; }
+  .vl-calculator-header { margin-bottom: 26px; }
+  .vl-calculator-heading h1 { font-size: 26px; }
+  .vl-calculator-heading p { font-size: 13px; }
+  .vl-income-controls { flex-direction: column; }
+  .vl-calc-button { width: 100%; min-height: 55px; }
+  .vl-results-header { flex-direction: column; gap: 11px; }
+  .vl-income-total { align-items: flex-start; }
+  .vl-calculator-tip { padding: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vl-calculator *, .vl-calculator *::before, .vl-calculator *::after { transition: none !important; animation: none !important; }
+}
