@@ -1,0 +1,2 @@
+# VaultLedger — apenas biblioteca padrão do Python (sqlite3, http.server)
+# Nenhuma dependência externa obrigatória
