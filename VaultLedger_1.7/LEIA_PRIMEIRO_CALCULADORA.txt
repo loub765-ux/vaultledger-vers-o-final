@@ -1,0 +1,15 @@
+VAULTLEDGER - CALCULADORA CORRIGIDA
+
+A pagina de calculadora foi corrigida para nao depender de CSS ou icones carregados pela internet.
+
+COMO USAR
+1. Extraia TODO este ZIP, mantendo a estrutura de pastas.
+2. Na sua copia antiga, substitua pages/calculadora.html pela versao deste ZIP. O arquivo agora tem os estilos principais embutidos.
+3. Para abrir o projeto completo localmente, use um servidor de desenvolvimento (por exemplo, npm install e npm run dev a partir da pasta principal). As paginas do restante do site dependem da estrutura e dos arquivos do projeto.
+4. Abra a calculadora a partir do menu do site e use Ctrl+F5 se o navegador ainda mostrar os estilos antigos.
+
+ARQUIVOS ALTERADOS NESTA CORRECAO
+- pages/calculadora.html: CSS completo da calculadora e do layout lateral embutido na pagina; icones SVG locais; layout responsivo.
+- css/calculadora.css: mantido para facilitar futuras edicoes (a pagina nao depende mais dele).
+
+A calculadora nao envia o valor informado para o servidor e nao altera os dados das outras paginas.
